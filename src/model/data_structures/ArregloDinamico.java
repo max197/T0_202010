@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico implements IArregloDinamico {
+public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamico<T> {
 	/**
 	 * Capacidad maxima del arreglo
 	 */
@@ -21,7 +21,7 @@ public class ArregloDinamico implements IArregloDinamico {
 	/**
 	 * Arreglo de elementos de tamaNo maximo
 	 */
-	private String elementos[ ];
+	private T elementos[];
 
 	/**
 	 * Construir un arreglo con la capacidad maxima inicial.
@@ -29,18 +29,19 @@ public class ArregloDinamico implements IArregloDinamico {
 	 */
 	public ArregloDinamico( int max )
 	{
-		elementos = new String[max];
+		elementos = (T[])new Object[max];
 		tamanoMax = max;
 		tamanoAct = 0;
+		
 	}
 
-	public void agregar( String dato )
+	public <S extends T> void agregar( S dato )
 	{
 		if ( tamanoAct == tamanoMax )
 		{  // caso de arreglo lleno (aumentar tamaNo)
 			tamanoMax = 2 * tamanoMax;
-			String [ ] copia = elementos;
-			elementos = new String[tamanoMax];
+			T[ ] copia = elementos;
+			elementos = (T[])new Object[tamanoMax];
 			for ( int i = 0; i < tamanoAct; i++)
 			{
 				elementos[i] = copia[i];
@@ -59,7 +60,7 @@ public class ArregloDinamico implements IArregloDinamico {
 		return tamanoAct;
 	}
 
-	public String darElemento(int i) {
+	public T darElemento(int i) {
 		// TODO implementar
 		if(i< elementos.length)
 			return elementos[i];
@@ -67,7 +68,7 @@ public class ArregloDinamico implements IArregloDinamico {
 			return null;
 	}
 
-	public String buscar(String dato) {
+	public <S extends T>T buscar(S dato) {
 		// TODO implementar
 		// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 		for(int i =0; i< elementos.length; i++)
@@ -80,12 +81,12 @@ public class ArregloDinamico implements IArregloDinamico {
 		return null;
 	}
 
-	public String eliminar(String dato) {
+	public <S extends T>T eliminar(S dato) {
 		// TODO implementar
 		// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 
-		String[] nuevoArray = new String[tamanoAct-1];
-		String eliminado = null;
+		T[] nuevoArray = (T[]) new Object[tamanoAct-1];
+		T eliminado = null;
 
 		boolean encontro = false;
 		for(int i =0,k = 0; i < elementos.length; i++)
