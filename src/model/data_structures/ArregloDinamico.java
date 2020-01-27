@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamico<T> {
+public class ArregloDinamico <T extends Comparable<T>> implements IArregloDinamico<T> {
 	/**
 	 * Capacidad maxima del arreglo
 	 */
@@ -29,19 +29,19 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
 	 */
 	public ArregloDinamico( int max )
 	{
-		elementos = (T[])new Object[max];
+		elementos = (T[]) new Comparable [max];
 		tamanoMax = max;
 		tamanoAct = 0;
 		
 	}
 
-	public <S extends T> void agregar( S dato )
+	public void agregar( T dato )
 	{
 		if ( tamanoAct == tamanoMax )
 		{  // caso de arreglo lleno (aumentar tamaNo)
 			tamanoMax = 2 * tamanoMax;
-			T[ ] copia = elementos;
-			elementos = (T[])new Object[tamanoMax];
+			T[ ] copia = (T[]) elementos;
+			elementos = (T[]) new Comparable[tamanoMax];
 			for ( int i = 0; i < tamanoAct; i++)
 			{
 				elementos[i] = copia[i];
@@ -63,12 +63,12 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
 	public T darElemento(int i) {
 		// TODO implementar
 		if(i< elementos.length)
-			return elementos[i];
+			return elementos[i];  
 		else 
 			return null;
 	}
 
-	public <S extends T>T buscar(S dato) {
+	public T buscar(T dato) {
 		// TODO implementar
 		// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 		for(int i =0; i< elementos.length; i++)
@@ -81,7 +81,7 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
 		return null;
 	}
 
-	public <S extends T>T eliminar(S dato) {
+	public T eliminar(T dato) {
 		// TODO implementar
 		// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 
@@ -89,7 +89,7 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
 		T eliminado = null;
 
 		boolean encontro = false;
-		for(int i =0,k = 0; i < elementos.length; i++)
+		for(int i =0,k = 0; i < elementos.length && !encontro; i++)
 		{
 			if(elementos[i].compareTo(dato)==0)
 			{
