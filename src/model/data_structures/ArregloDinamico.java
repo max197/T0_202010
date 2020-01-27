@@ -88,7 +88,7 @@ public class ArregloDinamico implements IArregloDinamico {
 		String eliminado = null;
 
 		boolean encontro = false;
-		for(int i =0,k = 0; i < elementos.length; i++)
+		for(int i =0,k = 0; i < elementos.length && !encontro; i++)
 		{
 			if(elementos[i].compareTo(dato)==0)
 			{
