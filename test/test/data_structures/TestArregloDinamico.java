@@ -19,19 +19,29 @@ public class TestArregloDinamico {
 
 	public void setUp2() {
 		for(int i =0; i< TAMANO*2; i++){
-			arreglo.agregar(""+i);
+			arreglo.agregar(i);
 		}
 	}
 
 	@Test
 	public void testArregloDinamico() {
 		// TODO
+		assertTrue(arreglo!=null);
+		assertEquals(0, arreglo.darTamano()); //ArregloDinamico con cero elementos (tamaño actual = 0)
+		
 	}
 
 	@Test
 	public void testDarElemento() {
 		setUp2();
 		// TODO
+		assertTrue("No es el elemento esperado", arreglo.darElemento(5).compareTo(5)==0);
+		assertFalse("El elemento no debería estar en el arreglo", arreglo.darElemento(2).compareTo(2)==0);
+		assertNull(arreglo.darElemento(300));
+		assertNotNull(arreglo.darElemento(6));
+	
+		
+		
 	}
 
 }
